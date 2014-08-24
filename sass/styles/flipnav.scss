@@ -1,0 +1,119 @@
+.flipnav-wrapper{
+	perspective: 1000px;
+    position: fixed;
+    right: 0px;
+    height: $header-height;
+    width: 100%;
+
+    .flipnav-content{
+	    height: $header-height;
+	    transform: rotateX(0deg) translateZ(-30px);
+	    transform-style: preserve-3d;
+
+	    .front.active{
+		    transform: rotateX(0) translateZ(30px);
+		}
+
+		.back.active{
+		    transform: rotateY(0) translateZ(30px);
+		}
+
+		.back{
+		    transform: rotateX(90deg) translateZ(30px);
+		    transition: transform .35s;
+		}
+
+		.front{
+		    transform: rotateX(-90deg) translateZ(30px);
+		    transition: transform .35s;
+		}
+
+		.front, .back{
+		    position: absolute;
+		    left: 0px;
+		    right: 0px;
+		    height: $header-height;
+		    background-image: url("/css/assets/images/header-background.png");
+		    background-color: #eaeff2;
+
+		    .flipnav-inner{
+		    	height: $header-height;
+		    	width: 1100px;
+		    	margin: 0px auto;
+
+		    	.flipnav-title{
+		    		display: inline-block;
+		    		vertical-align: top;
+		    		width: 340px;
+		    		line-height: $header-height;
+
+		    		font-family: Montserrat;
+		    		font-size: 24pt;
+		    	}
+
+		    	#searchbox{
+		    		display: inline-block;
+		    		margin: 12px 0px;
+		    		background-color: $color-main;
+				    border-radius: 5px;    
+				    border-width: 1px;
+				    border-style: solid;
+				    border-color: $color-nuetral;           
+				    width: 400px;
+				    padding: 2px 3px;
+				    overflow: hidden; /* Clear floats */
+
+				    #search, 
+					#submit {
+					    float: left;
+					}
+
+					#search {
+					    padding: 4px 6px;
+					    width: 344px;
+					    border-top: 1px solid $color-main;
+					    border-left: 1px solid $color-main;
+					    border-bottom: 1px solid $color-main;
+					    border-right: 0px solid $color-main;
+					    border-radius: 3px 0px 0px 3px;
+					    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25) inset;      
+					    font-family: Arial;      
+					}
+
+					/* ----------------------- */
+
+					#submit
+					{       
+					    background-color: $color-white;
+					    border-radius: 0px 3px 3px 0px; 
+					    border-width: 1px;
+					    border-style: solid;
+					    border-color: $color-main;
+					    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 
+					                0 1px 0 rgba(255, 255, 255, 0.3) inset;
+					    padding: 4px 6px;
+					    width: 42px;
+					    cursor: pointer;
+					    color: $color-nuetral;    
+					    font-size: 14px;
+					}
+
+					#submit:hover {       
+					    background-color: #95d788;
+					    background-image: linear-gradient(#6cbb6b, #95d788);
+					}   
+
+					#submit:active {       
+					    background: #95d788;
+					    outline: none;
+					    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;        
+					}
+
+					#submit::-moz-focus-inner {
+					       border: 0;  /* Small centering fix for Firefox */
+					}
+		    	}
+		    }
+		}
+	}
+}

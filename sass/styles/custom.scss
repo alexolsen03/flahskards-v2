@@ -1,0 +1,50 @@
+.space-me{
+	display: inline-block;
+	margin: 0px 14px;
+}
+
+ul.std-list{
+
+	li{
+		margin-bottom: 6px;
+		line-height: 1.5;
+
+		font-family: $font-body;
+		font-size: 14px;
+
+		&.accent{
+			text-align: center;
+			color: $color-accent;
+		}
+
+		&:hover{
+			color: $color-accent;
+		}
+	}
+}
+
+ul.stack-list{
+
+	li{
+		cursor: pointer;
+	}
+}
+
+div.study-list{
+	@include box-sizing;
+	
+	width: 250px;
+	line-height: 1.5;
+	padding: 8px;
+
+	&.study-list-exists{
+		background-color: $color-nuetral-bg;
+
+		ul.stack-list{
+			li{
+				font-family: $font-body-bold;
+				color: $color-accent-light;
+			}
+		}
+	}
+}

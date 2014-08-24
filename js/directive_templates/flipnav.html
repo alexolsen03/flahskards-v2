@@ -1,0 +1,14 @@
+<div class='flipnav-wrapper top-section'>
+	<div class='flipnav-content' ng-click='toggleMe()'>
+		<div ng-class="front ? 'front active' : 'front'">
+			<div class="flipnav-inner">
+				<h1 class="flipnav-title">{{ title }}</h1>
+				<form id="searchbox" action="">
+				    <input id="search" type="text" placeholder="Search for stacks..."></input>
+				    <button id="submit"><i class='fa fa-search'></i></button>
+				</form>
+			</div>
+		</div>
+		<div ng-class="front ? 'back' : 'back active'">Back</div>
+	</div>
+</div>

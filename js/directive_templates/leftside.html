@@ -1,0 +1,22 @@
+<div class='left-side go-left'>
+	<span class='heading-md'>My Stacks</span>
+	<br><br>
+	<ul class='std-list stack-list'>
+		<li ng-repeat="stack in myStacks" ng-click="addStack(stack)">{{stack.name}}</li>
+		<li class='accent'><i class='fa fa-plus'></i> New Stack</li>
+	</ul>
+	<hr>
+	<div>
+		<div ng-if='studyListSer.hasStacks()' class='study-list study-list-exists'>
+			<ul class='std-list stack-list'>
+				<li ng-repeat="stack in studyList" ng-click="removeStack(stack)">{{stack.name}}</li>
+			</ul>
+			<div class='align-c'>
+				<button class='btn btn-primary align-c'>Study</button>
+			</div>
+		</div>
+		<div ng-if='!studyListSer.hasStacks()' class='study-list align-c'>
+			<span class='nuetral heading-xsm'>Select a stack to begin studying!</span>
+		</div>
+	</div>
+</div>

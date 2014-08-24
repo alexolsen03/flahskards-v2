@@ -1,0 +1,41 @@
+<div class='container grid'>
+
+	<div class='grid-wrapper view-1'>
+		<div ng-repeat='i in getNumber(rowCt) track by $index' class='row' ng-class='{{i}}'>
+			<div ng-repeat='n in getNumber(colCt) track by $index' class='col col4'>
+				<div class='grid-card'>
+					<div class='grid-card-top'>
+						<span class='grid-card-title'>{{ testObjs[((i*colCt) - (colCt-n) - 1)].title }}</span>
+						<span class='grid-card-subject'>{{ testObjs[((i*colCt) - (colCt-n) - 1)].subject }}</span>
+					</div>
+					<div class='clearme'></div>
+					<br><br><br><br><br>
+
+					<span class='grid-card-author'>{{ testObjs[((i*colCt) - (colCt-n) - 1)].author }}</span>
+					<div class='clearme'></div>
+				</div>
+			</div>
+			<div class='clearme'></div>
+		</div>
+	</div>
+
+	<div class='grid-wrapper view-2'>
+		<div ng-repeat='i in getNumber(rowCt) track by $index' class='row' ng-class='{{ row+i}}'>
+			<div ng-repeat='n in getNumber(colCt) track by $index' class='col col4'>
+				<div class='grid-card'>
+					<div class='grid-card-top'>
+						<span class='grid-card-title'>{{ testObjs[((i*colCt) - (colCt-n) - 1) + 9].title }}</span>
+						<span class='grid-card-subject'>{{ testObjs[((i*colCt) - (colCt-n) - 1) + 9].subject }}</span>
+					</div>
+					<div class='clearme'></div>
+					<br><br><br><br><br>
+
+					<span class='grid-card-author'>{{ testObjs[((i*colCt) - (colCt-n) - 1) + 9].author }}</span>
+					<div class='clearme'></div>
+				</div>
+			</div>
+			<div class='clearme'></div>
+		</div>
+	</div>
+
+</div>
