@@ -2,7 +2,7 @@ var express = require('express');
 
 var app = express();
 
-app.listen(4000);
+app.listen(3000);
 
 //set the folder where our static documents are located
-app.use(express.static('c:/Node/nodejs/flashkards-v2'));
+app.use(express.static(__dirname));

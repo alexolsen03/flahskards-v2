@@ -4,8 +4,10 @@
     right: 0px;
     height: $header-height;
     width: 100%;
+    z-index: 9;
 
     .flipnav-content{
+    	position: relative;
 	    height: $header-height;
 	    transform: rotateX(0deg) translateZ(-30px);
 	    transform-style: preserve-3d;
@@ -37,9 +39,49 @@
 		    background-color: #eaeff2;
 
 		    .flipnav-inner{
+		    	position: relative;
 		    	height: $header-height;
 		    	width: 1100px;
 		    	margin: 0px auto;
+
+		    	.login-splash{
+		    		@include box-sizing;
+
+					position: absolute;
+					top: 0px;
+					right: 0px;
+					width: 210px;
+					padding: 8px;
+					border-radius: 0px 0px 4px 4px;
+
+					background-color: $color-main;
+					color: $color-white;
+					text-align: center;
+
+					.login-splash-title{
+						padding: 8px;
+						font-size: 16pt;
+					}
+					
+					ul{
+
+						.soc-icon{
+							display: inline-block;
+							padding: 10px 15px;
+
+							//font-size: 18px;
+
+							//i{
+								color: $color-accent-light;
+
+								&:hover{
+									cursor: pointer;
+									color: $color-accent;
+								}
+							//}
+						}
+					}
+				}
 
 		    	.flipnav-title{
 		    		display: inline-block;
@@ -77,7 +119,8 @@
 					    border-right: 0px solid $color-main;
 					    border-radius: 3px 0px 0px 3px;
 					    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25) inset;      
-					    font-family: Arial;      
+					    font-family: Arial;
+					    min-height: 17px;
 					}
 
 					/* ----------------------- */
@@ -96,17 +139,18 @@
 					    cursor: pointer;
 					    color: $color-nuetral;    
 					    font-size: 14px;
-					}
 
-					#submit:hover {       
-					    background-color: #95d788;
-					    background-image: linear-gradient(#6cbb6b, #95d788);
-					}   
+					    &:hover{
+					    	background-color: $color-accent;
+					    	color: $color-white;
+					    }
 
-					#submit:active {       
-					    background: #95d788;
-					    outline: none;
-					    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;        
+					    &:active{
+					    	background-color: $color-accent-light;
+					    	color: $color-white;
+					    	outline: none;
+					    	box-shadow: 0 1px 4px rgba(0,0,0,0.5) inset;
+					    }
 					}
 
 					#submit::-moz-focus-inner {
@@ -115,5 +159,7 @@
 		    	}
 		    }
 		}
+
 	}
+
 }

@@ -2,30 +2,23 @@
 <html>
 	<head>
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.min.js"></script>
-	     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-animate.min.js"></script>
+	    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-animate.min.js"></script>
+	    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+    
+
+	    <script src="/js/app.js" type="text/javascript"></script>
+	    <script src="/js/services.js" type="text/javascript"></script>
+	    <script src="/js/directives.js" type="text/javascript"></script>
+	    <script src="/js/controllers.js" type="text/javascript"></script>
 	     
-	     <script src="/js/app.js" type="text/javascript"></script>
-	     <script src="/js/services.js" type="text/javascript"></script>
-	     <script src="/js/directives.js" type="text/javascript"></script>
-	     <script src="/js/controllers.js" type="text/javascript"></script>
-	     
-	     <link rel="stylesheet" type="text/css" href="css/styles.css"/>
-	     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+	    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 	</head>
 	<body>
 		<div id='content' ng-app='Flashkards' ng-controller='MainController'>
 			<flipnav title="Flashkards"></flipnav>
 			<div class='wrapper mid-section'>
-				<br>
-				<br>
-				<div class='align-c heading-lg'>
-					<span class='space-me'>Create.</span>
-					<span class='space-me'>Study.</span>
-					<span class='space-me'>Share.</span>
-				</div>
-				<br>
-				<br>
-				<grid></grid>
+				<div ui-view></div>		
 			</div>
 		</div>
 	</body>

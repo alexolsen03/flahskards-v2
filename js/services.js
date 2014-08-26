@@ -127,8 +127,73 @@ app.factory('subjectsFactory', function($http){
   };
 });
 
+app.factory('testSearchFactory', function(){
+  return{
+    getResults: function(){
+      var objs = [
+        {
+          title: "Here is a Title",
+          author: "alexo",
+          count: 23,
+          subject: "biology",
+        },
+        {
+          title: "Oh hey another",
+          author: "alexo",
+          count: 23,
+          subject: "korean",
+        },
+        {
+          title: "Dooby dooby Doo",
+          author: "alexo",
+          count: 23,
+          subject: "german",
+        },
+        {
+          title: "Batteries, Pliers, Etc.",
+          author: "alexo",
+          count: 23,
+          subject: "algebra",
+        }
+      ];
+      return objs;
+    },
 
+    getCards: function(id){
+      var cards = [
+          {
+            front: 'Saturday',
+            back:  'Sonnerstag'
+          },
+          {
+            front: 'Monday',
+            back:  'Montag'
+          },
+          {
+            front: 'Sunday',
+            back:  'Sonntag'
+          },
+          {
+            front: 'Tuesday',
+            back:  'Deinstag'
+          },
+          {
+            front: 'Wednesday',
+            back:  'Mittag'
+          },
+          {
+            front: 'Friday',
+            back:  'Freitag'
+          }
+      ];
+      return cards;
+    }
+  }
+});
+
+/* test factory for splash screen */
 app.service('testFactory', [function () {
+  //replace with webservice call
   var testers = [
         {
           title: "Here is a Title",

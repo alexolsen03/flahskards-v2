@@ -1,0 +1,58 @@
+.results-list{	
+	.result{
+		border: 1px solid $color-nuetral;
+
+		&:hover{
+			color: $color-accent;
+			border-color: $color-accent;
+
+			@include transition(all, 0.1s, ease-in);
+		}
+
+		&.active{
+			background-color: $color-accent-light;
+
+			&:hover{
+				color: $color-main;
+			}
+		}
+
+		.result-title{
+			display: block;
+			padding: 10px;
+
+			font-size: 16pt;
+		}
+	}
+}
+
+.preview-board{
+	@include box-sizing;
+	padding: 5px 10px;
+	position: relative;
+	min-height: 500px;
+
+	background-color: $color-nuetral-bg;
+
+	.preview{
+		position: absolute;
+		top: 235px;
+		left: 0px;
+		width: 100%;
+
+		color: $color-nuetral;
+		text-align: center;
+		font-size: 30px;
+	}
+
+	.preview-card{
+		@include box-sizing;
+		padding: 6px;
+		margin: 5px 0px;
+		min-height: 100px;
+
+		border-radius: 3px;
+		background-color: $color-white;
+		border: 1px solid $color-nuetral;
+	}
+}

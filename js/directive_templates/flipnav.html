@@ -5,8 +5,16 @@
 				<h1 class="flipnav-title">{{ title }}</h1>
 				<form id="searchbox" action="">
 				    <input id="search" type="text" placeholder="Search for stacks..."></input>
-				    <button id="submit"><i class='fa fa-search'></i></button>
+				    <button id="submit" ui-sref='search'><i class='fa fa-search'></i></button>
 				</form>
+				<div class='login-splash'>
+					<div class='login-splash-title'>Join Now!</div>
+					<ul>
+						<li class="soc-icon"><i class='fa fa-2x fa-facebook'></i></li>
+						<li class="soc-icon"><i class='fa fa-2x fa-google-plus'></i></li>
+						<li class="soc-icon"><i class='fa fa-2x fa-envelope'></i></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<div ng-class="front ? 'back' : 'back active'">Back</div>
