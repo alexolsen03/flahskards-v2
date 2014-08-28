@@ -154,6 +154,8 @@ body {
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0044cc', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false); }
+  .btn-primary:hover {
+    background-image: none; }
 
 /******* Responsive Portion *********/
 .container {
@@ -341,6 +343,36 @@ div.study-list {
       font-family: OpenSansBold;
       color: #6bc3ee; }
 
+/* note some code is in search.scss */
+.flip-container {
+  perspective: 1000;
+  width: 192px;
+  height: 100px;
+  /* flip the pane when hovered */
+  /* flip speed goes here */ }
+  .flip-container:hover .flipper {
+    transform: rotateY(180deg);
+    transition: 0.5s; }
+  .flip-container .flipper {
+    transition: 0.9s;
+    transform-style: preserve-3d;
+    position: relative;
+    padding: 6px 0px;
+    /* hide back of pane during swap */
+    /* front pane, placed above back */
+    /* back, initially hidden pane */ }
+    .flip-container .flipper .front, .flip-container .flipper .back {
+      backface-visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 192px;
+      height: 100px; }
+    .flip-container .flipper .front {
+      z-index: 2; }
+    .flip-container .flipper .back {
+      transform: rotateY(180deg); }
+
 .grid {
   position: relative; }
   .grid .grid-wrapper {
@@ -444,13 +476,37 @@ div.study-list {
     -o-transition: all 0.1s ease-in;
     transition: all 0.1s ease-in; }
   .results-list .result.active {
-    background-color: #6bc3ee; }
+    background-color: #6bc3ee;
+    border-color: #0095dd; }
+    .results-list .result.active .result-title {
+      width: 80%;
+      -webkit-transition: width 0.2s ease-in;
+      -moz-transition: width 0.2s ease-in;
+      -o-transition: width 0.2s ease-in;
+      transition: width 0.2s ease-in; }
+    .results-list .result.active .study-btn {
+      -webkit-transition: width 0.2s ease-in;
+      -moz-transition: width 0.2s ease-in;
+      -o-transition: width 0.2s ease-in;
+      transition: width 0.2s ease-in;
+      width: 20%; }
     .results-list .result.active:hover {
       color: #4d4e53; }
   .results-list .result .result-title {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     display: block;
     padding: 10px;
     font-size: 16pt; }
+  .results-list .result .study-btn {
+    height: 53px;
+    width: 0px;
+    overflow: hidden; }
+    .results-list .result .study-btn button {
+      height: 100%;
+      width: 100%;
+      font-size: 18px; }
 
 .preview-board {
   -webkit-box-sizing: border-box;
@@ -468,15 +524,17 @@ div.study-list {
     color: #d1d1d1;
     text-align: center;
     font-size: 30px; }
-  .preview-board .preview-card {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 6px;
-    margin: 5px 0px;
-    min-height: 100px;
-    border-radius: 3px;
-    background-color: #fff;
-    border: 1px solid #d1d1d1; }
+  .preview-board .flip-container {
+    margin: 7px 0px; }
+    .preview-board .flip-container .front, .preview-board .flip-container .back {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      padding: 6px;
+      margin: 5px 0px;
+      height: 100px;
+      border-radius: 3px;
+      background-color: #fff;
+      border: 1px solid #d1d1d1; }
 
 /*# sourceMappingURL=styles.css.map */

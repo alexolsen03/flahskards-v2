@@ -7,7 +7,9 @@
 		<div class='col col5'>
 			<ul class='results-list std-list'>
 				<li ng-repeat='result in results' class='result' ng-click='getCards(result)' ng-class='result.active ? "active" : ""'>
-					<span class='result-title'> {{ result.title }}</span>
+					<span class='go-left result-title'> {{ result.title }}</span>
+					<span class='go-right study-btn'><button class='btn-primary'>Study</button></span>
+					<div class='clearme'></div>
 				</li>
 			</ul>
 		</div>
@@ -16,8 +18,16 @@
 				<div ng-hide='preview' class='preview'>Preview Stack</div>
 				<div ng-show='preview' class='row' ng-repeat='i in getNumber(rowCt)'>
 					<div class='col col4' ng-repeat='n in getNumber(colCt)'>
-						<div class='preview-card'>
-							{{ previewCards[((i*colCt) - (colCt-n) - 1)].front }}
+						<div class='flip-container'>
+							<div class='flipper'>
+									<div class='front'>
+										{{ previewCards[((i*colCt) - (colCt-n) - 1)].front }}
+									</div>
+									<div class='back'>
+										{{ previewCards[((i*colCt) - (colCt-n) - 1)].back }}
+									</div>
+								
+							</div>
 						</div>
 					</div>
 					<div class='clearme'></div>
