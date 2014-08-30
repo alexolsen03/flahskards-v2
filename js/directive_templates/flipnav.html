@@ -1,6 +1,6 @@
 <div class='flipnav-wrapper top-section'>
-	<div class='flipnav-content' ng-click='toggleMe()'>
-		<div ng-class="front ? 'front active' : 'front'">
+	<div class='flipnav-content' >
+		<div ng-class="view == true ? 'front active' : 'front'">
 			<div class="flipnav-inner">
 				<h1 class="flipnav-title">{{ title }}</h1>
 				<form id="searchbox" action="">
@@ -17,6 +17,10 @@
 				</div>
 			</div>
 		</div>
-		<div ng-class="front ? 'back' : 'back active'">Back</div>
+		<div ng-class="view == true ? 'back' : 'back active'">
+			<div class="flipnav-inner">
+				<h1 class="flipnav-title">{{ title }}</h1>
+			</div>
+		</div>
 	</div>
 </div>

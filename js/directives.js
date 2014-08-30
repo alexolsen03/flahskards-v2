@@ -3,7 +3,8 @@ app.directive("flipnav", function(){
 		restrict: 'E',
 		templateUrl: '/js/directive_templates/flipnav.html',
 		scope: {
-			title: '@'
+			title: '@',
+			view: '='
 		},
 		controller: 'FlipnavController'
 	}

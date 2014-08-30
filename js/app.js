@@ -17,4 +17,17 @@ app.config(function($stateProvider, $urlRouterProvider){
 			templateUrl: '/partials/search.html',
 			controller: 'SearchController'
 		});
+
+	$stateProvider
+
+		.state('studyMode', {
+			url: '/study',
+			templateUrl: '/partials/study.html',
+			controller: 'StudyController'
+		});
+
+
+
+
+
 });

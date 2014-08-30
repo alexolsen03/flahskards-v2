@@ -10,6 +10,12 @@ app.controller("MainController", ['$scope', 'studyList', function($scope, studyL
 
 	console.log('studyList is' + $scope.isStudyList);
 
+	$scope.front = true;
+
+	$scope.toggleNav = function($event){
+		$scope.front == true ? $scope.front = false : $scope.front = true;
+	};
+
 	$scope.addStack = function(stack){
 		studyList.addStack(stack);
 	}
@@ -21,11 +27,6 @@ app.controller("MainController", ['$scope', 'studyList', function($scope, studyL
 
 app.controller("FlipnavController", function($scope){
 
-	$scope.front = true;
-
-	$scope.toggleMe = function($event){
-		//$scope.front == true ? $scope.front = false : $scope.front = true;
-	};
 });
 
 app.controller("GridController", ['$scope', 'testFactory', function($scope, testFactory){
@@ -76,5 +77,10 @@ app.controller("SearchController", ['$scope', 'testSearchFactory', function($sco
 		}
 
 	    return newArr;   
+	}
+
+	$scope.toggleView = function(){
+		console.log('toggling view');
+		$scope.$parent.front == true ? $scope.$parent.front = false : $scope.$parent.front = true;
 	}
 }]);

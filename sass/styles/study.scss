@@ -1,0 +1,48 @@
+.study-grid{
+	margin-top: 40px;
+
+	.question-container, .option-container{
+		@include box-sizing;
+		margin: 7px 0px;
+
+		border: 1px solid $color-nuetral;
+		border-radius: 3px;
+		font-family: OpenSansLight;
+		color: $color-main;
+		text-align: center;
+	}
+
+	.question-container{
+		position: relative;
+		height: $card-size;
+
+		.question{
+			position: absolute;
+			top: ($card-size / 2) - 11;
+			width: 100%;
+
+			font-size: 22px;
+		}
+	}
+
+	.option-container{
+		position: relative;
+		height: $card-size / 3;
+
+		&:hover{
+			background-color: $color-accent-light;
+			border-color: $color-accent;
+			cursor: pointer;
+		}
+
+		.option{
+			position: absolute;
+			top: (($card-size / 3) / 2) - 8;
+			width: 100%;
+			font-size: 16px;
+
+		}
+	}
+}
+
+
