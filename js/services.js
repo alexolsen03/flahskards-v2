@@ -50,7 +50,7 @@ app.service('studyList', function(){
     else
       return false;
   };
-})
+});
 
 /* Factories */
 
@@ -124,6 +124,51 @@ app.factory('subjectsFactory', function($http){
         return result.data;
       });
     }
+  };
+});
+
+app.service('activeService', function(){
+  var activeStack = [];
+
+  this.addToActiveStack = function(stack){
+    console.log('adding to active stack');
+    console.log(stack)
+    activeStack = activeStack.concat(stack);
+    console.log('after active stack is..');
+    console.log(activeStack);
+  };
+
+  this.getActiveStack = function(){
+    return activeStack;
+  };
+
+  this.emptyActiveStack = function(){
+    activeStack = [];
+  };
+
+  this.getNCards = function(n, ignoreCard){
+    var returnCards = [];
+    for(var i=0; i<n; i++){
+      var option = null;
+      while(option == null){
+        var randIndex = Math.floor((Math.random() * (activeStack.length - 1)) + 1);
+        console.log('randIndex is ' + randIndex);
+        var prospect = activeStack[randIndex];
+        if(ignoreCard != null){
+          console.log('ignoreCard is not null');
+          if(prospect != ignoreCard && returnCards.indexOf(prospect) < 0)
+            option = prospect;
+        }else{
+          if(returnCards.indexOf(prospect) < 0)
+            option = prospect;
+        }
+      }
+      console.log('pushing ');
+      console.log(option.front);
+      returnCards.push(option);
+    }
+
+    return returnCards;
   };
 });
 
