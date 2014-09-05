@@ -12,7 +12,7 @@
 					<ul>
 						<li class="soc-icon"><i class='fa fa-2x fa-facebook'></i></li>
 						<li class="soc-icon"><i class='fa fa-2x fa-google-plus'></i></li>
-						<li class="soc-icon"><i class='fa fa-2x fa-envelope'></i></li>
+						<li class="soc-icon" ng-click="openModal('lg')"><i class='fa fa-2x fa-envelope'></i></li>
 					</ul>
 				</div>
 			</div>
@@ -20,6 +20,10 @@
 		<div ng-class="view == true ? 'back' : 'back active'">
 			<div class="flipnav-inner">
 				<h1 class="flipnav-title">{{ title }}</h1>
+				<form id="searchbox" action="">
+				    <input id="search" type="text" placeholder="Search for stacks..."></input>
+				    <button id="submit" ui-sref='search'><i class='fa fa-search'></i></button>
+				</form>
 			</div>
 		</div>
 	</div>

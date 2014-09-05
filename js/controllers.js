@@ -1,17 +1,8 @@
-app.controller("MainController", ['$scope', 'studyList', function($scope, studyList){
-	// $scope.myStacks = [
-	// 	{name: "My Stack"},
-	// 	{name: "Jiyongs Stack"},
-	// 	{name: "Chezas Stack"}
-	// ];
-
-	// $scope.studyList = studyList.getStacks();
-	// $scope.studyListSer = studyList;
-
+app.controller("MainController", ['$scope', 'studyList', function($scope, $modal, studyList){
 	$scope.front = true;
 
 	$scope.toggleNav = function($event){
-		$scope.front == true ? $scope.front = false : $scope.front = true;
+		$scope.front == !$scope.front;
 	};
 
 	$scope.addStack = function(stack){
@@ -23,9 +14,37 @@ app.controller("MainController", ['$scope', 'studyList', function($scope, studyL
 	}
 }]);
 
-app.controller("FlipnavController", function($scope){
-
+app.controller("FlipnavController", function($scope, $modal){
+	$scope.openModal = function(size){
+		var modalInstance = $modal.open({
+			templateUrl: '/js/directive_templates/loginmodal.html',
+			controller: 'LoginController',
+			size: size
+		});
+	}
 });
+
+app.controller("LoginController", ['$scope', '$modalInstance', 'usersFactory', function($scope, $modalInstance, usersFactory){
+	
+	$scope.createUser = function(){
+		var usr = {
+			username: 'test_user',
+			email: 'test@gmail.com',
+			account_type_id: 3,
+			password: 'test',
+			password_confirmation: 'test'
+		};
+		usersFactory.createUser(usr);
+	}
+
+	$scope.ok = function () {
+	    $modalInstance.close($scope.selected.item);
+	};
+
+	$scope.cancel = function () {
+	    $modalInstance.dismiss('cancel');
+	};
+}]);
 
 app.controller("GridController", ['$scope', 'testFactory', function($scope, testFactory){
 	$scope.testObjs = testFactory.getTestCards();
