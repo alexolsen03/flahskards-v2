@@ -24,26 +24,47 @@ app.controller("FlipnavController", function($scope, $modal){
 	}
 });
 
-app.controller("LoginController", ['$scope', '$modalInstance', 'usersFactory', function($scope, $modalInstance, usersFactory){
-	
-	$scope.createUser = function(){
+app.controller("LoginController", ['$scope', '$modalInstance', 'appManager', 'usersFactory', function($scope, $modalInstance, appManager, usersFactory){
+	//be sure to validate this on the server
+	$scope.passwordLength = 8;
+
+	$scope.signUp = function(user){
+		createUser(user);
+	}
+
+	$scope.signIn = function(user){
+		getUser('email', 'pass');
+	}
+
+	function createUser(){
 		var usr = {
 			username: 'test_user',
 			email: 'test@gmail.com',
 			account_type_id: 3,
-			password: 'test',
-			password_confirmation: 'test'
+			password: 'testtest',
+			password_confirmation: 'testtest',
 		};
 		usersFactory.createUser(usr);
 	}
 
-	$scope.ok = function () {
-	    $modalInstance.close($scope.selected.item);
-	};
+	function getUser(email, pass){
+		usersFactory.getUser(1).then(function(data){
+			if(data != null && data.email != null) //see if it returned the object i expect
+				appManager.setUser(data);
+			else
+				console.log('returned strange object');
+		});
+	}
 
-	$scope.cancel = function () {
-	    $modalInstance.dismiss('cancel');
-	};
+	// $scope.ok = function () {
+	// 	//
+	//     $modalInstance.close($scope.selected.item);
+	// };
+
+	// $scope.cancel = function () {
+	// 	//
+	//     $modalInstance.dismiss('cancel');
+	// };
 }]);
 
 app.controller("GridController", ['$scope', 'testFactory', function($scope, testFactory){

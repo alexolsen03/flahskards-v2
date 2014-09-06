@@ -13,7 +13,7 @@ app.service('appManager', function() {
       return this.stackHolder['stack'];
   };
   this.setUser = function(newObj) {
-      console.log("Setting user to: " + newObj);
+      console.log("Setting user to: ");
       console.log(newObj);
       console.log(this.userHolder['user']);
       this.userHolder['user'] = newObj;

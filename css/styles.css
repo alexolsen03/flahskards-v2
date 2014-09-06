@@ -102,6 +102,10 @@ body {
 .nuetral {
   color: #d1d1d1; }
 
+.validation-error {
+  color: red;
+  font-size: 12px; }
+
 .heading-xsm {
   font-size: 14pt; }
 
@@ -650,7 +654,9 @@ div.study-list {
 
 .modal-title {
   margin: 0;
-  line-height: 1.42857143; }
+  line-height: 1.42857143;
+  font-size: 22px;
+  font-weight: bold; }
 
 .modal-body {
   position: relative;

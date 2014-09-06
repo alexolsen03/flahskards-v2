@@ -97,6 +97,11 @@ body{
 	//color: $color-gray;
 }
 
+.validation-error{
+	color: red;
+	font-size: 12px;
+}
+
 .heading-xsm{
 	@extend .title-font;
 	font-size: 14pt;
