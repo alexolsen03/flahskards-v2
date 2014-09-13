@@ -43,7 +43,7 @@
                     <label for='passwordUp'>Password</label><br />
                     <input id='passwordUp' type="password" ng-model="user.password" required /><br /><br />
                     <div class='align-r'>
-                        <button ng-click='signIn(user)' class='btn btn-primary'>Sign In</button>
+                        <button ng-click='signIn(user.email, user.password)' class='btn btn-primary'>Sign In</button>
                     </div>
                 </form>
             </div>

@@ -14,7 +14,32 @@ app.controller("MainController", ['$scope', 'studyList', function($scope, $modal
 	}
 }]);
 
-app.controller("FlipnavController", function($scope, $modal){
+app.controller("FlipnavController", ['$rootScope', '$scope', '$modal', 'appManager', function($rootScope, $scope, $modal, appManager){
+	//$scope.userLoggedIn = appManager.isUserLoggedIn();
+	$scope.myService = appManager;
+	$scope.logout = false;
+	//TODO need to implement this.
+
+	 $scope.$watch('myService.getUser()', function(newVal){
+	 	console.log('watch is firing');
+
+	 	if($scope.myService.getUser() != null)
+	 		$scope.userLoggedIn = appManager.isUserLoggedIn();
+	 	
+	 	//session is active but appManager needs a user object
+	 	if(!$scope.userLoggedIn){
+	 		if($scope.myService.isUserLoggedIn() && $scope.logout){
+	 			$scope.myService.setUser($scope.myService.getUserInSession());
+	 		}
+	 	}
+	 });
+
+	// $rootScope.$on('rootScope:emit', function(){
+	// 	console.log('rootscope emitted');
+	// 	console.log(appManager.isUserLoggedIn());
+	// 	$scope.userLoggedIn = appManager.isUserLoggedIn();
+	// });
+
 	$scope.openModal = function(size){
 		var modalInstance = $modal.open({
 			templateUrl: '/js/directive_templates/loginmodal.html',
@@ -22,9 +47,15 @@ app.controller("FlipnavController", function($scope, $modal){
 			size: size
 		});
 	}
-});
 
-app.controller("LoginController", ['$scope', '$modalInstance', 'appManager', 'usersFactory', function($scope, $modalInstance, appManager, usersFactory){
+	$scope.logout = function(){
+		appManager.logoutUser();
+		$scope.logout = false;
+		$scope.userLoggedIn = false;
+	}
+}]);
+
+app.controller("LoginController", ['$rootScope', '$scope', '$modalInstance', 'appManager', 'usersFactory', function($rootScope, $scope, $modalInstance, appManager, usersFactory){
 	//be sure to validate this on the server
 	$scope.passwordLength = 8;
 
@@ -32,8 +63,8 @@ app.controller("LoginController", ['$scope', '$modalInstance', 'appManager', 'us
 		createUser(user);
 	}
 
-	$scope.signIn = function(user){
-		getUser('email', 'pass');
+	$scope.signIn = function(email, password){
+		getUser('email', password);
 	}
 
 	function createUser(){
@@ -49,10 +80,18 @@ app.controller("LoginController", ['$scope', '$modalInstance', 'appManager', 'us
 
 	function getUser(email, pass){
 		usersFactory.getUser(1).then(function(data){
-			if(data != null && data.email != null) //see if it returned the object i expect
-				appManager.setUser(data);
-			else
+			if(data != null && data.email != null){ //see if it returned the object i expect
+				data.password = pass;
+				appManager.createSession(data).then(function(d){
+					console.log('returned promise and data');
+					console.log(data);
+					appManager.setUser(data);
+				});
+				//$rootScope.$emit('rootScope:emit', 'emit!');
+				$modalInstance.close();
+			}else{
 				console.log('returned strange object');
+			}
 		});
 	}
 

@@ -58,28 +58,31 @@
 					color: $color-white;
 					text-align: center;
 
-					.login-splash-title{
-						padding: 8px;
-						font-size: 16pt;
-					}
-					
-					ul{
+					.guest-user{
 
-						.soc-icon{
-							display: inline-block;
-							padding: 10px 15px;
+						.login-splash-title{
+							padding: 8px;
+							font-size: 16pt;
+						}
+						
+						ul{
 
-							//font-size: 18px;
+							.soc-icon{
+								display: inline-block;
+								padding: 10px 15px;
 
-							//i{
 								color: $color-accent-light;
 
 								&:hover{
 									cursor: pointer;
 									color: $color-accent;
 								}
-							//}
+							}
 						}
+					}
+
+					.signed-in-user{
+						
 					}
 				}
 

@@ -8,12 +8,18 @@
 				    <button id="submit" ui-sref='search'><i class='fa fa-search'></i></button>
 				</form>
 				<div class='login-splash'>
-					<div class='login-splash-title'>Join Now!</div>
-					<ul>
-						<li class="soc-icon"><i class='fa fa-2x fa-facebook'></i></li>
-						<li class="soc-icon"><i class='fa fa-2x fa-google-plus'></i></li>
-						<li class="soc-icon" ng-click="openModal('lg')"><i class='fa fa-2x fa-envelope'></i></li>
-					</ul>
+					<div ng-if='!userLoggedIn' class='guest-user'>
+						<div class='login-splash-title'>Join Now!</div>
+						<ul>
+							<li class="soc-icon"><i class='fa fa-2x fa-facebook'></i></li>
+							<li class="soc-icon"><i class='fa fa-2x fa-google-plus'></i></li>
+							<li class="soc-icon" ng-click="openModal('lg')"><i class='fa fa-2x fa-envelope'></i></li>
+						</ul>
+					</div>
+					<div ng-if='userLoggedIn' class='signed-in-user'>
+						<span>Welcome <span>{{ myService.getUser().username }}</span></span>
+						<button ng-click='logout()'>Log me out</button>
+					</div>
 				</div>
 			</div>
 		</div>

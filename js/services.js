@@ -2,7 +2,7 @@
 
 /* Services */
 
-app.service('appManager', function() {
+app.service('appManager', function($window, $http) {
   this.stackHolder = {};
   this.userHolder = {};
 
@@ -13,15 +13,42 @@ app.service('appManager', function() {
       return this.stackHolder['stack'];
   };
   this.setUser = function(newObj) {
-      console.log("Setting user to: ");
-      console.log(newObj);
-      console.log(this.userHolder['user']);
       this.userHolder['user'] = newObj;
-      console.log(this.userHolder['user']);
   };
   this.getUser = function(){
       return this.userHolder['user'];
   };
+  this.createSession = function (user){
+      console.log('creating session');
+      return $http.post('http://localhost:3000/api/v1/signin?email=' + user.email + '&password=' + user.password).then(function(result){
+        console.log(result.data);
+        console.log('token: ' + result.data.token.access_token);
+        console.log('email: ' + result.data.user.email);
+        $window.sessionStorage.token = result.data.token.access_token;
+        $window.sessionStorage.email = result.data.user.email;
+        return result.data;
+      });
+    };
+  this.isUserLoggedIn = function(){
+    if($window.sessionStorage.token == null)
+      return false;
+    else
+      return true;
+  };
+  this.getUserInSession = function(){
+    return $http.get('http://localhost:3000/api/v1/sessions/' + $window.sessionStorage.token).then(function(result){
+        return result.data.user;
+    });
+  };
+  this.logoutUser = function(){
+    $http
+        .delete('http://localhost:3000/api/v1/signout', this.userHolder['user'])
+          .success(function (data, status, headers, config) {
+            delete $window.sessionStorage.token;
+            delete $window.sessionStorage.email;
+        });
+    this.setUser(null);
+  }
 });
 
 app.service('studyList', function(){
@@ -91,7 +118,7 @@ app.factory('cardsFactory', function($http) {
   };
 });
 
-app.factory('usersFactory', function($http) {
+app.factory('usersFactory', function($http, $window) {
   return {
     getUser: function(userId){
       return $http.get('http://localhost:3000/api/v1/users/' + userId).then(function(result){
@@ -365,6 +392,7 @@ app.service('testFactory', [function () {
 app.factory('authInterceptor', function ($rootScope, $q, $window) {
   return {
     request: function (config) {
+
       config.headers = config.headers || {};
       if ($window.sessionStorage.token) {
         config.headers.token  = $window.sessionStorage.token;
@@ -372,7 +400,6 @@ app.factory('authInterceptor', function ($rootScope, $q, $window) {
       if ($window.sessionStorage.email) {
         config.headers.email = $window.sessionStorage.email;
       }
-
 
       return config;
     },

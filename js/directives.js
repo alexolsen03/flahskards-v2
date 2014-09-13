@@ -6,7 +6,7 @@ app.directive("flipnav", function(){
 			title: '@',
 			view: '='
 		},
-		controller: 'FlipnavController'
+		controller: 'FlipnavController',
 	}
 });
 
