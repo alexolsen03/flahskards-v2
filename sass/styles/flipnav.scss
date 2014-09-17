@@ -82,7 +82,36 @@
 					}
 
 					.signed-in-user{
-						
+						text-align: right;
+						font-size: 12px;
+
+						.btn-transparent, .dropdown-toggle{
+							vertical-align: baseline;
+							line-height: 1;
+							font-size: 12px;
+						}
+
+						.btn-transparent{
+							padding: 0px;
+							color: $color-nuetral;
+							text-decoration: none;
+						}
+
+						.dropdown-toggle{
+							padding: 4px 8px;
+						}
+
+						.user-actions-menu{
+
+							li{
+								text-align: left;
+								font-size: 12px;
+
+								a{
+									color: $color-main;
+								}
+							}
+						}
 					}
 				}
 

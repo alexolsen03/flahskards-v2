@@ -137,9 +137,11 @@ app.factory('usersFactory', function($http, $window) {
     	});
     },
     getUserStacks: function(userId){
-      return $http.get('http://localhost:3000/api/v1/users/' + userId + '/stacks').then(function(result){
-        return result.data;
-      });
+      if(userId != null){
+        return $http.get('http://localhost:3000/api/v1/users/' + userId + '/stacks').then(function(result){
+          return result.data;
+        });
+      }
     }
   };
 });

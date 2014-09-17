@@ -84,6 +84,18 @@ body {
 .align-r {
   text-align: right; }
 
+.valign-t {
+  vertical-align: top; }
+
+.valign-c {
+  vertical-align: center; }
+
+.valign-b {
+  vertical-align: bottom; }
+
+.inline-b {
+  display: inline-block; }
+
 .center-me {
   position: absolute;
   top: 50%;
@@ -119,6 +131,68 @@ body {
   font-size: 28pt; }
 
 /******* Buttons ********************/
+.btn-group {
+  position: relative;
+  display: inline-block;
+  font-size: 0;
+  white-space: nowrap;
+  vertical-align: middle; }
+  .btn-group.open .dropdown-toggle {
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125); }
+  .btn-group .btn {
+    font-size: 14px;
+    position: relative; }
+    .btn-group .btn .caret {
+      display: inline-block;
+      margin-left: 4px;
+      width: 0;
+      height: 0;
+      vertical-align: middle;
+      border-top: 4px solid #000000;
+      border-right: 4px solid transparent;
+      border-left: 4px solid transparent;
+      content: ""; }
+
+.open > .dropdown-menu {
+  display: block; }
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  list-style: none;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box; }
+  .dropdown-menu li.divider {
+    height: 1px;
+    margin: 9px 0;
+    overflow: hidden;
+    background-color: #e5e5e5; }
+  .dropdown-menu li a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap; }
+
 .btn {
   display: inline-block;
   padding: 4px 12px;
@@ -166,6 +240,14 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false); }
   .btn-primary:hover {
     background-image: none; }
+
+.btn-transparent {
+  background-color: transparent;
+  background-image: none;
+  border-color: transparent;
+  text-shadow: none;
+  box-shadow: none;
+  text-decoration: underline; }
 
 /******* Responsive Portion *********/
 .container {
@@ -252,16 +334,34 @@ body {
           background-color: #4d4e53;
           color: #fff;
           text-align: center; }
-          .flipnav-wrapper .flipnav-content .front .flipnav-inner .login-splash .login-splash-title, .flipnav-wrapper .flipnav-content .back .flipnav-inner .login-splash .login-splash-title {
+          .flipnav-wrapper .flipnav-content .front .flipnav-inner .login-splash .guest-user .login-splash-title, .flipnav-wrapper .flipnav-content .back .flipnav-inner .login-splash .guest-user .login-splash-title {
             padding: 8px;
             font-size: 16pt; }
-          .flipnav-wrapper .flipnav-content .front .flipnav-inner .login-splash ul .soc-icon, .flipnav-wrapper .flipnav-content .back .flipnav-inner .login-splash ul .soc-icon {
+          .flipnav-wrapper .flipnav-content .front .flipnav-inner .login-splash .guest-user ul .soc-icon, .flipnav-wrapper .flipnav-content .back .flipnav-inner .login-splash .guest-user ul .soc-icon {
             display: inline-block;
             padding: 10px 15px;
             color: #6bc3ee; }
-            .flipnav-wrapper .flipnav-content .front .flipnav-inner .login-splash ul .soc-icon:hover, .flipnav-wrapper .flipnav-content .back .flipnav-inner .login-splash ul .soc-icon:hover {
+            .flipnav-wrapper .flipnav-content .front .flipnav-inner .login-splash .guest-user ul .soc-icon:hover, .flipnav-wrapper .flipnav-content .back .flipnav-inner .login-splash .guest-user ul .soc-icon:hover {
               cursor: pointer;
               color: #0095dd; }
+          .flipnav-wrapper .flipnav-content .front .flipnav-inner .login-splash .signed-in-user, .flipnav-wrapper .flipnav-content .back .flipnav-inner .login-splash .signed-in-user {
+            text-align: right;
+            font-size: 12px; }
+            .flipnav-wrapper .flipnav-content .front .flipnav-inner .login-splash .signed-in-user .btn-transparent, .flipnav-wrapper .flipnav-content .front .flipnav-inner .login-splash .signed-in-user .dropdown-toggle, .flipnav-wrapper .flipnav-content .back .flipnav-inner .login-splash .signed-in-user .btn-transparent, .flipnav-wrapper .flipnav-content .back .flipnav-inner .login-splash .signed-in-user .dropdown-toggle {
+              vertical-align: baseline;
+              line-height: 1;
+              font-size: 12px; }
+            .flipnav-wrapper .flipnav-content .front .flipnav-inner .login-splash .signed-in-user .btn-transparent, .flipnav-wrapper .flipnav-content .back .flipnav-inner .login-splash .signed-in-user .btn-transparent {
+              padding: 0px;
+              color: #d1d1d1;
+              text-decoration: none; }
+            .flipnav-wrapper .flipnav-content .front .flipnav-inner .login-splash .signed-in-user .dropdown-toggle, .flipnav-wrapper .flipnav-content .back .flipnav-inner .login-splash .signed-in-user .dropdown-toggle {
+              padding: 4px 8px; }
+            .flipnav-wrapper .flipnav-content .front .flipnav-inner .login-splash .signed-in-user .user-actions-menu li, .flipnav-wrapper .flipnav-content .back .flipnav-inner .login-splash .signed-in-user .user-actions-menu li {
+              text-align: left;
+              font-size: 12px; }
+              .flipnav-wrapper .flipnav-content .front .flipnav-inner .login-splash .signed-in-user .user-actions-menu li a, .flipnav-wrapper .flipnav-content .back .flipnav-inner .login-splash .signed-in-user .user-actions-menu li a {
+                color: #4d4e53; }
         .flipnav-wrapper .flipnav-content .front .flipnav-inner .flipnav-title, .flipnav-wrapper .flipnav-content .back .flipnav-inner .flipnav-title {
           display: inline-block;
           vertical-align: top;

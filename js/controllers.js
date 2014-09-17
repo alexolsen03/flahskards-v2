@@ -14,31 +14,37 @@ app.controller("MainController", ['$scope', 'studyList', function($scope, $modal
 	}
 }]);
 
-app.controller("FlipnavController", ['$rootScope', '$scope', '$modal', 'appManager', function($rootScope, $scope, $modal, appManager){
-	//$scope.userLoggedIn = appManager.isUserLoggedIn();
+app.controller("FlipnavController", ['$rootScope', '$scope', '$modal', 'appManager', 'usersFactory', function($rootScope, $scope, $modal, appManager, usersFactory){
 	$scope.myService = appManager;
 	$scope.logout = false;
-	//TODO need to implement this.
+	$scope.status = {
+	    isopen: false
+	};
 
-	 $scope.$watch('myService.getUser()', function(newVal){
+	$scope.stacks = [{title: 'none'}];
+
+	$scope.$watch('myService.getUser()', function(newVal){
 	 	console.log('watch is firing');
 
-	 	if($scope.myService.getUser() != null)
+	 	if($scope.myService.getUser() != null){
 	 		$scope.userLoggedIn = appManager.isUserLoggedIn();
+	 	}
 	 	
 	 	//session is active but appManager needs a user object
 	 	if(!$scope.userLoggedIn){
 	 		if($scope.myService.isUserLoggedIn() && $scope.logout){
 	 			$scope.myService.setUser($scope.myService.getUserInSession());
+	 			console.log('meeeh');
+		 		$scope.myService.getUser().then(function(val){
+		 			$scope.stacks = usersFactory.getUserStacks(val.id);
+		 		});
+		 	// 	if($scope.myService.getUser() != null)
+				// 	$scope.stacks = usersFactory.getUserStacks($scope.myService.getUser().id);
+				// else
+				// 	$scope.stacks = [{title: 'none'}];
 	 		}
 	 	}
-	 });
-
-	// $rootScope.$on('rootScope:emit', function(){
-	// 	console.log('rootscope emitted');
-	// 	console.log(appManager.isUserLoggedIn());
-	// 	$scope.userLoggedIn = appManager.isUserLoggedIn();
-	// });
+	});
 
 	$scope.openModal = function(size){
 		var modalInstance = $modal.open({
