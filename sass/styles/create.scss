@@ -1,0 +1,28 @@
+.create-wrapper{
+
+	td{
+		padding: 4px 12px;
+
+		&:first-child{
+			padding-left: 0px;
+		}
+	}
+
+	input[type='text']{
+		@include box-sizing;
+		min-width: 400px;
+		padding: 4px;
+
+		font-size: 14px;
+	}
+
+	textarea{
+		width: 100%;
+		height: 350px;
+		padding: 8px;
+
+		font-size: 14px;
+		border-radius: 3px;
+		resize: none;
+	}
+}

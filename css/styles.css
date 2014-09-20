@@ -114,9 +114,19 @@ body {
 .nuetral {
   color: #d1d1d1; }
 
+.main {
+  color: #4d4e53; }
+
+.main-lt {
+  color: #a0a1a9; }
+
 .validation-error {
   color: red;
   font-size: 12px; }
+
+.label-lg {
+  font-size: 18pt;
+  font-weight: bold; }
 
 .heading-xsm {
   font-size: 14pt; }
@@ -241,6 +251,11 @@ body {
   .btn-primary:hover {
     background-image: none; }
 
+.btn-lg {
+  padding: 8px 24px;
+  font-size: 24px;
+  line-height: 20px; }
+
 .btn-transparent {
   background-color: transparent;
   background-image: none;
@@ -360,8 +375,12 @@ body {
             .flipnav-wrapper .flipnav-content .front .flipnav-inner .login-splash .signed-in-user .user-actions-menu li, .flipnav-wrapper .flipnav-content .back .flipnav-inner .login-splash .signed-in-user .user-actions-menu li {
               text-align: left;
               font-size: 12px; }
-              .flipnav-wrapper .flipnav-content .front .flipnav-inner .login-splash .signed-in-user .user-actions-menu li a, .flipnav-wrapper .flipnav-content .back .flipnav-inner .login-splash .signed-in-user .user-actions-menu li a {
+              .flipnav-wrapper .flipnav-content .front .flipnav-inner .login-splash .signed-in-user .user-actions-menu li a, .flipnav-wrapper .flipnav-content .front .flipnav-inner .login-splash .signed-in-user .user-actions-menu li button, .flipnav-wrapper .flipnav-content .back .flipnav-inner .login-splash .signed-in-user .user-actions-menu li a, .flipnav-wrapper .flipnav-content .back .flipnav-inner .login-splash .signed-in-user .user-actions-menu li button {
                 color: #4d4e53; }
+              .flipnav-wrapper .flipnav-content .front .flipnav-inner .login-splash .signed-in-user .user-actions-menu li button, .flipnav-wrapper .flipnav-content .back .flipnav-inner .login-splash .signed-in-user .user-actions-menu li button {
+                display: block;
+                padding: 3px 20px;
+                line-height: 1.42857143; }
         .flipnav-wrapper .flipnav-content .front .flipnav-inner .flipnav-title, .flipnav-wrapper .flipnav-content .back .flipnav-inner .flipnav-title {
           display: inline-block;
           vertical-align: top;
@@ -844,5 +863,24 @@ div.study-list {
   position: fixed;
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0); }
+
+.create-wrapper td {
+  padding: 4px 12px; }
+  .create-wrapper td:first-child {
+    padding-left: 0px; }
+.create-wrapper input[type='text'] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  min-width: 400px;
+  padding: 4px;
+  font-size: 14px; }
+.create-wrapper textarea {
+  width: 100%;
+  height: 350px;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 3px;
+  resize: none; }
 
 /*# sourceMappingURL=styles.css.map */

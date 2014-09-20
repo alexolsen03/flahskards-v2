@@ -113,9 +113,22 @@ body{
 	//color: $color-gray;
 }
 
+.main{
+	color: $color-main;
+}
+
+.main-lt{
+	color: $color-main-light;
+}
+
 .validation-error{
 	color: red;
 	font-size: 12px;
+}
+
+.label-lg{
+	font-size: 18pt;
+	font-weight: bold;
 }
 
 .heading-xsm{
@@ -267,6 +280,12 @@ display: block;
 	&:hover{
 		background-image: none;
 	}
+}
+
+.btn-lg{
+	padding: 8px 24px;
+	font-size: 24px;
+	line-height: 20px;
 }
 
 .btn-transparent{

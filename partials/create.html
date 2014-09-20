@@ -1,0 +1,32 @@
+<div class='container create-wrapper'>
+	<div class='row'>
+		<div class='col col9'>
+			<table>
+				<tr>
+					<td><label class='label-lg' for='stackTitle'>Title</label></td>
+					<td><input ng-model='stackTitle' id='stackTitle' name='stackTitle' placeholder='Enter a title for your stack' type='text' /></td>
+				</tr>
+				<br />
+				<tr>
+					<td><label class='label-lg' for='stackSubject'>Subject</label></td>
+					<td><input ng-model='stackSubject' id='stackSubject' name='stackSubject' placeholder='Enter a subject for your stack' type='text' /></td>
+				</tr>
+			</table>
+			<br />
+			<br />
+			<div class='main-lt'>Separate the sides of your card using an '=' sign</div>
+			<div class='main-lt'>Start a new card by going down a line</div>
+			<br />
+			<textarea ng-model='cardString' placeholder="Ex. Monday is good = Monntag ist gut"></textarea>
+		</div>
+		<div class='col col3 align-r'>
+			<div class='label-lg'>
+				<span>Number of Cards: </span><span class='accent'>{{ stackSize }}</span>
+			</div>
+			<br />
+			<br />
+			<div><button ng-click='createStack()' class='btn btn-primary btn-lg'>Create Stack</button></div>
+		</div>
+		<div class='clearme'></div>
+	</div>
+</div>

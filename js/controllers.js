@@ -38,10 +38,6 @@ app.controller("FlipnavController", ['$rootScope', '$scope', '$modal', 'appManag
 		 		$scope.myService.getUser().then(function(val){
 		 			$scope.stacks = usersFactory.getUserStacks(val.id);
 		 		});
-		 	// 	if($scope.myService.getUser() != null)
-				// 	$scope.stacks = usersFactory.getUserStacks($scope.myService.getUser().id);
-				// else
-				// 	$scope.stacks = [{title: 'none'}];
 	 		}
 	 	}
 	});
@@ -111,6 +107,28 @@ app.controller("LoginController", ['$rootScope', '$scope', '$modalInstance', 'ap
 	//     $modalInstance.dismiss('cancel');
 	// };
 }]);
+
+app.controller("CreateController", function($scope){
+	$scope.cards = [];
+	$scope.cardString = '';
+	$scope.stackSize = 0;
+	$scope.$watch('cardString', function(val){
+		$scope.stackSize = $scope.cardString.split(/\r\n|\r|\n/).length;
+	});
+
+	$scope.createStack = function(){
+		var cardSet = $scope.cardString.split(/\r\n|\r|\n/);
+		for(var i=0; i<cardSet.length; i++){
+			var set = cardSet[i];
+			var cardSides = set.split('=>');
+			$scope.cards.push({
+				front: cardSides[0],
+				back:  cardSides[1]
+			});
+		}
+		console.log($scope.cards);
+	}
+});
 
 app.controller("GridController", ['$scope', 'testFactory', function($scope, testFactory){
 	$scope.testObjs = testFactory.getTestCards();

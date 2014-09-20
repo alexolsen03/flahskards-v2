@@ -107,8 +107,14 @@
 								text-align: left;
 								font-size: 12px;
 
-								a{
+								a, button{
 									color: $color-main;
+								}
+
+								button{
+									display: block;
+									padding: 3px 20px;
+									line-height: 1.42857143;
 								}
 							}
 						}

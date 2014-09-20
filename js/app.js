@@ -26,6 +26,14 @@ app.config(function($stateProvider, $urlRouterProvider){
 			controller: 'StudyController'
 		});
 
+	$stateProvider
+
+		.state('create', {
+			url: '/create',
+			templateUrl: 'partials/create.html',
+			controller: 'CreateController'
+		});
+
 
 
 
