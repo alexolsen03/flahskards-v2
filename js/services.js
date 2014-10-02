@@ -136,6 +136,11 @@ app.factory('usersFactory', function($http, $window) {
     		return result.data;
     	});
     },
+    updateUser: function(user){
+      return $http.put('http://localhost:3000/api/v1/users/' + user.user.id, user).then(function(result){
+        return result.data;
+      });
+    },
     getUserStacks: function(userId){
       if(userId != null){
         return $http.get('http://localhost:3000/api/v1/users/' + userId + '/stacks').then(function(result){
@@ -176,6 +181,8 @@ app.service('activeService', function(){
   };
 
   this.getNCards = function(n, ignoreCard){
+    if(activeStack.length < n)
+      n = activeStack.length - 1;
     var returnCards = [];
     for(var i=0; i<n; i++){
       var option = null;
@@ -184,7 +191,6 @@ app.service('activeService', function(){
         console.log('randIndex is ' + randIndex);
         var prospect = activeStack[randIndex];
         if(ignoreCard != null){
-          console.log('ignoreCard is not null');
           if(prospect != ignoreCard && returnCards.indexOf(prospect) < 0)
             option = prospect;
         }else{

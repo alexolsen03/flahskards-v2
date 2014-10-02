@@ -1,0 +1,17 @@
+<div class='container'>
+	<div ng-repeat='card in cards' class='row'>
+		<div class='col col6'>
+			<div class='card' ng-click='toggleReadOnly(card, "front")'>
+				<textarea ng-model='card.front_text' ng-readonly='card.readonlyFront'></textarea>
+				<button ng-click='saveCard(card)' class='btn btn-primary'><i class='fa fa-save'></i></button>
+			</div>
+		</div>
+		<div class='col col6'>
+			<div class='card' ng-click='toggleReadOnly(card, "back")'>
+				<textarea ng-model='card.back_text' ng-readonly='card.readonlyBack'></textarea>
+				<button ng-click='saveCard(card)' class='btn btn-primary'><i class='fa fa-save'></i></button>
+			</div>
+		</div>
+		<div class='clearme'></div>
+	</div>
+</div>

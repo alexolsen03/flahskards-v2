@@ -14,7 +14,7 @@ app.controller("MainController", ['$scope', 'studyList', function($scope, $modal
 	}
 }]);
 
-app.controller("FlipnavController", ['$rootScope', '$scope', '$modal', 'appManager', 'usersFactory', function($rootScope, $scope, $modal, appManager, usersFactory){
+app.controller("FlipnavController", ['$rootScope', '$scope', '$state', '$modal', 'appManager', 'usersFactory', function($rootScope, $scope, $state, $modal, appManager, usersFactory){
 	$scope.myService = appManager;
 	$scope.logout = false;
 	$scope.status = {
@@ -34,13 +34,19 @@ app.controller("FlipnavController", ['$rootScope', '$scope', '$modal', 'appManag
 	 	if(!$scope.userLoggedIn){
 	 		if($scope.myService.isUserLoggedIn() && $scope.logout){
 	 			$scope.myService.setUser($scope.myService.getUserInSession());
-	 			console.log('meeeh');
+	 			console.log('set user');
 		 		$scope.myService.getUser().then(function(val){
 		 			$scope.stacks = usersFactory.getUserStacks(val.id);
 		 		});
 	 		}
 	 	}
 	});
+
+	$scope.setActiveStack = function(stack){
+		console.log('setting active stack yo');
+		$scope.myService.setStack(stack);
+		$state.transitionTo('viewStack', null, {reload: true});
+	}
 
 	$scope.openModal = function(size){
 		var modalInstance = $modal.open({
@@ -54,6 +60,10 @@ app.controller("FlipnavController", ['$rootScope', '$scope', '$modal', 'appManag
 		appManager.logoutUser();
 		$scope.logout = false;
 		$scope.userLoggedIn = false;
+	}
+
+	$scope.navigateToSearch = function(){
+		$state.transitionTo('search', null, {reload: true});
 	}
 }]);
 
@@ -96,19 +106,9 @@ app.controller("LoginController", ['$rootScope', '$scope', '$modalInstance', 'ap
 			}
 		});
 	}
-
-	// $scope.ok = function () {
-	// 	//
-	//     $modalInstance.close($scope.selected.item);
-	// };
-
-	// $scope.cancel = function () {
-	// 	//
-	//     $modalInstance.dismiss('cancel');
-	// };
 }]);
 
-app.controller("CreateController", function($scope){
+app.controller("CreateController", ['$scope', '$state', 'appManager', 'stacksFactory', 'usersFactory', function($scope, $state, appManager, stacksFactory, usersFactory){
 	$scope.cards = [];
 	$scope.cardString = '';
 	$scope.stackSize = 0;
@@ -118,17 +118,50 @@ app.controller("CreateController", function($scope){
 
 	$scope.createStack = function(){
 		var cardSet = $scope.cardString.split(/\r\n|\r|\n/);
+		console.log('card set is...');
+		console.log(cardSet);
+		$scope.cards = [];
 		for(var i=0; i<cardSet.length; i++){
 			var set = cardSet[i];
 			var cardSides = set.split('=>');
-			$scope.cards.push({
-				front: cardSides[0],
-				back:  cardSides[1]
-			});
+			var card = {
+				front_text: cardSides[0],
+				back_text:  cardSides[1]
+			}
+			$scope.cards.push(card);
 		}
-		console.log($scope.cards);
+
+		if($scope.cards != null){
+			console.log('meeeh');
+			console.log(appManager.getUser());
+			appManager.getUser().then(function(data){
+				console.log(data);
+				var userId = data.id;
+				console.log('user id is ' + userId);
+				console.log($scope.cards);
+				var stack = {
+					title: $scope.stackTitle,
+					subject_id: 1,
+					rating: 2.5,
+					difficulty: 1,
+					public: true,
+					cards_attributes: $scope.cards
+				};
+				data.stacks_attributes = [stack];
+				data.password = 'testtest'
+				var user = { user: data };
+				usersFactory.updateUser(user).then(function(data){
+					console.log('create user successful');
+					console.log('data')
+				});
+
+			});
+		}else{
+			console.log('size is empty');
+		}
+		$state.transitionTo('viewStack');
 	}
-});
+}]);
 
 app.controller("GridController", ['$scope', 'testFactory', function($scope, testFactory){
 	$scope.testObjs = testFactory.getTestCards();
@@ -147,30 +180,36 @@ app.controller("GridController", ['$scope', 'testFactory', function($scope, test
 	}
 }]);
 
-app.controller("SearchController", ['$scope', 'testSearchFactory', 'activeService', function($scope, testSearchFactory, activeService){
-	$scope.results = testSearchFactory.getResults();
-
-	$scope.colCt = 3;
-	$scope.rowCt = Math.ceil($scope.results.length / 3);
+app.controller("SearchController", ['$scope', '$state', 'testSearchFactory', 'stacksFactory', 'cardsFactory', 'activeService', function($scope, $state, testSearchFactory, stacksFactory, cardsFactory, activeService){
+	//$scope.results = testSearchFactory.getResults();
+	stacksFactory.getStacks().then(function(data){
+		$scope.results = data;
+		console.log($scope.results);
+		$scope.colCt = 3;
+		$scope.rowCt = Math.ceil($scope.results.length / 3);
+		console.log('rowCt is ' + $scope.rowCt);
+	});
 
 	$scope.preview = false;
 	if($scope.$parent.front == false)
 		$scope.$parent.front = true;
 
 	$scope.getCards = function(card){
-		$scope.previewCards = testSearchFactory.getCards(card);
-		console.log('preview cards are ' + $scope.previewCards);
-		if(!$scope.preview)
-			$scope.preview = true;
+		cardsFactory.getCards(card.id).then(function(data){
+			$scope.previewCards = data;
+			if(!$scope.preview)
+				$scope.preview = true;
 
-		for(var i=0; i<$scope.results.length; i++){
-			if($scope.results[i].active != null && $scope.results[i].active == true){
-				$scope.results[i].active = false;
-				break;
+			for(var i=0; i<$scope.results.length; i++){
+				if($scope.results[i].active != null && $scope.results[i].active == true){
+					$scope.results[i].active = false;
+					break;
+				}
 			}
-		}
 
-		card.active = true;
+			$scope.rowCt = Math.ceil($scope.previewCards.length / 3);
+			card.active = true;
+		})
 	}
 
 	$scope.getNumber = function(num) {
@@ -184,8 +223,10 @@ app.controller("SearchController", ['$scope', 'testSearchFactory', 'activeServic
 
 	$scope.toggleView = function(){
 		console.log('toggling view');
+		activeService.emptyActiveStack();
 		activeService.addToActiveStack($scope.previewCards);
 		$scope.$parent.front == true ? $scope.$parent.front = false : $scope.$parent.front = true;
+		$state.transitionTo('studyMode', null, {reload: true});
 	}
 }]);
 
@@ -203,6 +244,7 @@ app.controller("StudyController", ['$scope', 'activeService', function($scope, a
 		console.log($scope.activeCard);
 		$scope.optionCards = activeService.getNCards(($scope.nOptions - 1), $scope.activeCard);
 		$scope.optionCards.push($scope.activeCard);
+		shuffle($scope.optionCards);
 	}
 
 	function resetCards(){
@@ -212,6 +254,25 @@ app.controller("StudyController", ['$scope', 'activeService', function($scope, a
 		}
 	}
 
+	function shuffle(array) {
+		var currentIndex = array.length, temporaryValue, randomIndex ;
+
+		// While there remain elements to shuffle...
+		while (0 !== currentIndex) {
+
+		// Pick a remaining element...
+		randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex -= 1;
+
+		// And swap it with the current element.
+		temporaryValue = array[currentIndex];
+		array[currentIndex] = array[randomIndex];
+		array[randomIndex] = temporaryValue;
+		}
+
+		return array;
+	}
+
 	$scope.submitAnswer = function(card){
 		console.log('meh');
 		$scope.amtAsked++;
@@ -219,5 +280,69 @@ app.controller("StudyController", ['$scope', 'activeService', function($scope, a
 			$scope.amtCorrect++;
 		}
 		prepareStudyCards();
+	}
+}]);
+
+app.controller("ViewController", ['$scope', 'appManager', 'cardsFactory', 'usersFactory', function($scope, appManager, cardsFactory, usersFactory){
+	$scope.stack = appManager.getStack();
+
+	if($scope.stack != null){
+		var stackId = appManager.getStack().id;
+
+		if(stackId != null){
+			cardsFactory.getCards(stackId).then(function(data){
+				console.log('retreived cards...');
+				console.log(data);
+				$scope.cards = data;
+				for(var i=0; i < $scope.cards.length; i++){
+					$scope.cards[i].readonlyFront = true;
+					$scope.cards[i].readonlyBack = true;
+				}
+			});
+		}else{
+			console.log('cant retreive cards... stack id is null');
+		}
+	}else{
+		console.log('couldnt retreive cards');
+	}
+
+	$scope.toggleReadOnly = function(card, side){
+		setReadonlyAs(true);
+
+		if(side == "front")
+			card.readonlyFront = !card.readonlyFront;
+		else
+			card.readonlyBack = !card.readonlyBack;
+	}
+
+	$scope.saveCard = function(card){
+		if($scope.cards != null){
+			if($scope.stack != null){
+				$scope.stack.cards_attributes = $scope.cards;
+				appManager.getUser().then(function(data){
+					var userId = data.id;
+					data.stacks_attributes = [$scope.stack];
+					data.password = 'testtest'
+					var user = { user: data };
+					console.log(user);
+					usersFactory.updateUser(user).then(function(data){
+						console.log('update user successful');
+						card.readonlyFront = true;
+						card.readonlyBack = true;
+					});
+
+				});
+			}
+		}else{
+			console.log('size is empty');
+		}
+		setReadonlyAs(true);
+	}
+
+	function setReadonlyAs(bool){
+		for(var i=0; i < $scope.cards.length; i++){
+			$scope.cards[i].readonlyFront = bool;
+			$scope.cards[i].readonlyBack = bool;
+		}
 	}
 }]);

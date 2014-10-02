@@ -34,7 +34,13 @@ app.config(function($stateProvider, $urlRouterProvider){
 			controller: 'CreateController'
 		});
 
+	$stateProvider
 
+		.state('viewStack', {
+			url: '/view',
+			templateUrl: 'partials/view.html',
+			controller: 'ViewController'
+		});
 
 
 

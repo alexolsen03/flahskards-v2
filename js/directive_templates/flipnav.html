@@ -5,7 +5,7 @@
 				<h1 class="flipnav-title">{{ title }}</h1>
 				<form id="searchbox" action="">
 				    <input id="search" type="text" placeholder="Search for stacks..."></input>
-				    <button id="submit" ui-sref='search'><i class='fa fa-search'></i></button>
+				    <button id="submit" ng-click='navigateToSearch()'><i class='fa fa-search'></i></button>
 				</form>
 				<div class='login-splash'>
 					<div ng-if='!userLoggedIn' class='guest-user'>
@@ -25,7 +25,7 @@
 					      </button>
 					      <ul class="dropdown-menu user-actions-menu" role="menu">
 					      	<li ng-repeat='stack in stacks'>
-								<a href='#'>{{ stack.title }}</a>
+								<button ng-click='setActiveStack(stack)' class='btn btn-transparent' >{{ stack.title }}</button>
 					      	</li>
 					        <li class="divider"></li>
 					        <li><button class='btn btn-transparent' ui-sref='create'>Add New Stack</button></li>
